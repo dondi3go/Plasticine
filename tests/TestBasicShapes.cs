@@ -39,7 +39,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap (points);
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -58,7 +58,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap (pointsA.Reverse());
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -77,7 +77,7 @@ public class TestBasicShapes : MonoBehaviour {
         }
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -91,7 +91,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap (PointList.CreateUnitPolygon (3));
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -107,7 +107,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap ( pointsA.Reverse() );
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -126,7 +126,7 @@ public class TestBasicShapes : MonoBehaviour {
         }
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -140,7 +140,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap (PointList.CreateUnitPolygon (5));
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -156,7 +156,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap ( pointsA.Reverse() );
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 
@@ -175,7 +175,7 @@ public class TestBasicShapes : MonoBehaviour {
         }
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (obj, mesh);
+        NodeBuilder.SetMesh (obj, mesh);
         return obj;
     }
 

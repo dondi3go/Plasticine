@@ -25,7 +25,7 @@ public class TestInflate : MonoBehaviour {
         }
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (gameObject, mesh);
+        NodeBuilder.SetMesh (gameObject, mesh);
     }
 
     void SphereSide(PointList points, MeshBuilder builder, int depth) {

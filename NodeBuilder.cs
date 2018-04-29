@@ -12,7 +12,7 @@ public class NodeBuilder {
     //
     // Add a Mesh to a GameObject
     //
-    public static void AddMesh(GameObject obj, Mesh mesh)
+    public static void SetMesh(GameObject obj, Mesh mesh)
     {
         MeshFilter filter = GetMeshFilter(obj);
         GetMeshRenderer (obj); // Use it for Material
@@ -34,7 +34,7 @@ public class NodeBuilder {
     //
     // Add a Material to a GameObject (replace default one)
     //
-    public static void AddMaterial(GameObject obj, Material mat)
+    public static void SetMaterial(GameObject obj, Material mat)
     {
         MeshRenderer renderer = GetMeshRenderer(obj);
         if (renderer.sharedMaterial.name == "default") {

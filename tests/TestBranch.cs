@@ -27,7 +27,7 @@ public class TestBranch : MonoBehaviour {
         }
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (gameObject, mesh);
+        NodeBuilder.SetMesh (gameObject, mesh);
     }
 
     //

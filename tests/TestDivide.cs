@@ -24,7 +24,7 @@ public class TestDivide : MonoBehaviour {
         builder.Cap (pointsA.Reverse ());
         Mesh mesh = builder.Bake ();
 
-        NodeBuilder.AddMesh (gameObject, mesh);
+        NodeBuilder.SetMesh (gameObject, mesh);
     }
 
     void DigHole(PointList points, MeshBuilder builder) {
