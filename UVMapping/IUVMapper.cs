@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Plasticine {
 
-public interface IUVMapper {
+    public interface IUVMapper {
 
-    Vector2 GetUV(Vector3 point);
+        Vector2 GetUV(Vector3 point);
 
-}
+    }
 
 }
