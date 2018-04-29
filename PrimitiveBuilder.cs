@@ -154,8 +154,6 @@ public class PrimitiveBuilder {
 
         PointList[] pointsM = new PointList[n + 1];
 
-        Vector3 v = Vector (axis);
-
         for (int i = 0; i <= n; i++) {
             float angle = Mathf.Deg2Rad * (arcMinDeg + i * (arcMaxDeg - arcMinDeg) / n);
             pointsM[i] = PointList.CreatePolygon (axis, Mathf.Cos (angle), sides, Mathf.Sin (angle));
@@ -164,7 +162,7 @@ public class PrimitiveBuilder {
             }
         }
 
-        float epsilonDegree = 0.1f;
+        //float epsilonDegree = 0.1f;
 
         //if (arcMinDeg > -90f) {
         builder.Cap (pointsM [0].Reverse());
