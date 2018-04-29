@@ -15,15 +15,18 @@ namespace Plasticine {
         private List<Vector3> m_points = new List<Vector3>();
 
         //
-        // UV's are implicitly represented
+        // UV's are implicitly represented (default is (0,0) everywhere)
         //
-        private IUVMapper m_uvMapper = new FlatYZMapper();
+        private IUVMapper m_uvMapper = new ZeroMapper();
 
         //
         // Keep a unique id for each unique point, share id when needed
         //
         private List<int> m_uids = new List<int>();
 
+        //
+        // Generator of unique identifiers
+        //
         private static int m_uidCounter = 0;
         private static int NextUid() {
             return m_uidCounter++;
@@ -189,7 +192,7 @@ namespace Plasticine {
 
 
         //
-        // Use origin, new origin must be returned !
+        // Use origin, TODO : new origin should be returned !
         //
         public PointList Extrude(Vector3 origin, Vector3 direction, Vector3 nextDirection)
         {
@@ -231,7 +234,7 @@ namespace Plasticine {
         }
 
         //
-        //
+        // 3 axis scale
         //
         public PointList Scale(Vector3 origin, float alpha)
         {
@@ -246,7 +249,7 @@ namespace Plasticine {
         }
 
         //
-        // 
+        // Uniform scale
         //
         public PointList Scale (float alpha) {
             return Scale(ComputeBarycenter(), alpha);
@@ -316,9 +319,10 @@ namespace Plasticine {
         public static PointList CreateUnitPolygon(int sides)
         {
             PointList result = new PointList ();
+            float indexToAngle = Mathf.PI*2f/(float)sides;
             for (int i = 0; i < sides; i++) {
-                float angle = -i*Mathf.PI*2f/(float)sides;
-                result.Add (0.5f*Mathf.Cos(angle), 0f, 0.5f*Mathf.Sin(angle));
+                float angle = i * indexToAngle;
+                result.Add (0.5f*Mathf.Sin(angle), 0f, 0.5f*Mathf.Cos(angle));
             }
             return result;
         }
@@ -329,25 +333,26 @@ namespace Plasticine {
         public static PointList CreatePolygon(PointListAxis axis, float radius, int sides, float axisCoord = 0f)
         {
             PointList result = new PointList ();
+            float indexToAngle = Mathf.PI*2f/(float)sides;
             switch(axis)
             {
             case PointListAxis.XAxis:
                 for (int i = 0; i < sides; i++) {
-                    float angle = i*Mathf.PI*2f/(float)sides;
+                    float angle = i * indexToAngle;
                     result.Add (axisCoord, radius*Mathf.Cos(angle), radius*Mathf.Sin(angle));
                 }
                 break;
 
             case PointListAxis.YAxis:
                 for (int i = 0; i < sides; i++) {
-                    float angle = -i*Mathf.PI*2f/(float)sides;
-                    result.Add (radius*Mathf.Cos(angle), axisCoord, radius*Mathf.Sin(angle));
+                    float angle = i * indexToAngle;
+                    result.Add (radius*Mathf.Sin(angle), axisCoord, radius*Mathf.Cos(angle));
                 }
                 break;
 
             case PointListAxis.ZAxis:
                 for (int i = 0; i < sides; i++) {
-                    float angle = i*Mathf.PI*2f/(float)sides;
+                    float angle = i * indexToAngle;
                     result.Add (radius*Mathf.Cos(angle), radius*Mathf.Sin(angle), axisCoord);
                 }
                 break;
