@@ -86,7 +86,7 @@ namespace Plasticine {
             } else {
                 
                 Mesh mesh = BuildSphere (axis, 1.0f, sides);
-                MeshAdapter.ScaleVertices (ref mesh, new Vector3 (radius, radius, radius));
+                MeshAdapter.ScaleVertices (ref mesh, radius);
                 return mesh;
             }
         }

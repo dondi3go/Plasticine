@@ -21,8 +21,8 @@ public class TestPrimitives : MonoBehaviour {
         CreateXCylinder (-2f, 2f);
         CreateYCylinder (0f, 2f);
         CreateZCylinder (2f, 2f);
+
         float tSpan = Time.realtimeSinceStartup - tStart;
-        //string str = string.Format ("{0:0.##}", tSpan);
         Debug.Log ("Creation duration = " + tSpan.ToString("0.000") + " seconds");
     }
 
