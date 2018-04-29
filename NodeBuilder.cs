@@ -15,7 +15,7 @@ public class NodeBuilder {
     public static void SetMesh(GameObject obj, Mesh mesh)
     {
         MeshFilter filter = GetMeshFilter(obj);
-        GetMeshRenderer (obj); // Use it for Material
+        GetMeshRenderer (obj); // Set a default Material
         filter.sharedMesh = mesh;
     }
 
@@ -37,11 +37,7 @@ public class NodeBuilder {
     public static void SetMaterial(GameObject obj, Material mat)
     {
         MeshRenderer renderer = GetMeshRenderer(obj);
-        if (renderer.sharedMaterial.name == "default") {
-            renderer.sharedMaterial = mat;
-        } else {
-            // Add 'mat' to the array of materials
-        }
+        renderer.sharedMaterial = mat;
     }
 
     //
