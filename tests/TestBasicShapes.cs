@@ -11,20 +11,20 @@ public class TestBasicShapes : MonoBehaviour {
 
     void Start () {
 
-        // 3
-        CreateTriangle (-2f, 0);
-        CreateTriangleUp(-2f, 2f);
-        CreateTriangleHop(-2f, 4f);
+        // 3 sides
+        CreateTriangle (-2f, -2f);
+        CreateTriangleUp(-2f, 0f);
+        CreateTriangleHop(-2f, 2f);
 
-        // 4
-        CreateUnitTile (0, 0);
-        CreateUnitTileUp (0, 2f);
-        CreateUnitTileHop (0, 4f);
+        // 4 sides
+        CreateUnitTile (0, -2f);
+        CreateUnitTileUp (0, 0f);
+        CreateUnitTileHop (0, 2f);
 
-        // 5
-        CreatePentagon (2f, 0);
-        CreatePentagonUp (2f, 2f);
-        CreatePentagonHop (2f, 4f);
+        // 5 sides
+        CreatePentagon (2f, -2f);
+        CreatePentagonUp (2f, 0f);
+        CreatePentagonHop (2f, 2f);
     }
 
     //

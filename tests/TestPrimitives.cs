@@ -14,13 +14,13 @@ public class TestPrimitives : MonoBehaviour {
         float tStart = Time.realtimeSinceStartup;
         CreateCube (0f, -2f);
 
-        CreateXSphere (0f, 0f);
-        CreateYSphere (2f, 0f);
-        CreateZSphere (4f, 0f);
+        CreateXSphere (-2f, 0f);
+        CreateYSphere (0f, 0f);
+        CreateZSphere (2f, 0f);
 
-        CreateXCylinder (0f, 2f);
-        CreateYCylinder (2f, 2f);
-        CreateZCylinder (4f, 2f);
+        CreateXCylinder (-2f, 2f);
+        CreateYCylinder (0f, 2f);
+        CreateZCylinder (2f, 2f);
         float tSpan = Time.realtimeSinceStartup - tStart;
         //string str = string.Format ("{0:0.##}", tSpan);
         Debug.Log ("Creation duration = " + tSpan.ToString("0.000") + " seconds");

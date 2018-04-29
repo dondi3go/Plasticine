@@ -23,7 +23,7 @@ public class TestBranch : MonoBehaviour {
 
         // Call Branch() on each face
         foreach(PointList points in list) {
-            Branch (points, builder, 8);
+            Branch (points, builder, 5);
         }
         Mesh mesh = builder.Bake ();
 
