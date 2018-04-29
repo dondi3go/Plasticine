@@ -13,6 +13,7 @@ namespace Plasticine {
 
         //
         // Link between a position in space and the triangles that use this position
+        // See 'Build()' method
         //
         class PositionLinks
         {
