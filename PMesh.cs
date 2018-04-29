@@ -6,29 +6,27 @@ using UnityEditor;
 namespace Plasticine {
 
     //
-    // Link between a position in space and the triangles that use this position
-    //
-    public class PositionLinks
-    {
-        public Dictionary<int, int> triangleToVertex = new Dictionary<int, int> ();
-    }
-
-
-    //
-    // A Triangle
-    //
-    public class Triangle
-    {
-        public int[] pIndex = new int[3]; // indices in m_positions
-        public int[] uvIndex = new int[3]; // id in uvs
-    }
-
-
-    //
     // Procedural Mesh Generation
     // Ranem it into SHAPE
     //
     public class PMesh {
+
+        //
+        // Link between a position in space and the triangles that use this position
+        //
+        class PositionLinks
+        {
+            public Dictionary<int, int> triangleToVertex = new Dictionary<int, int> ();
+        }
+
+        //
+        // A Triangle
+        //
+        class Triangle
+        {
+            public int[] pIndex = new int[3]; // indices in m_positions
+            public int[] uvIndex = new int[3]; // id in uvs
+        }
 
         // Positions (can be shared)
         private List<Vector3> m_positions = new List<Vector3> ();
@@ -101,7 +99,7 @@ namespace Plasticine {
         }
 
         //
-        //
+        // Compute one normal per triangle
         //
         private List<Vector3> ComputeFlatNormals()
         {
@@ -117,7 +115,7 @@ namespace Plasticine {
         }
 
         //
-        //
+        // Create one PositionLink per Position
         //
         private List<PositionLinks> ComputePositionLinks ()
         {
@@ -135,10 +133,11 @@ namespace Plasticine {
         }
 
         //
-        //
+        // Create Unity Mesh, smooh normals using smoothAngles
         //
         public Mesh Build( float smoothAngle = 45f )
         {
+            // Compute normal for each triangle
             List<Vector3> flatNormals = ComputeFlatNormals ();
 
             // Compute PositionLink, one per position, init with -1
