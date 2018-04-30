@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Plasticine {
 
-    public enum AxisSide {Positive, Negative}
-
     //
     //
     //

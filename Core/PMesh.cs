@@ -121,7 +121,7 @@ namespace Plasticine {
         private List<PositionLinks> ComputePositionLinks ()
         {
             List<PositionLinks> links = new List<PositionLinks>();
-            for (int posIndex = 0; posIndex < m_triangles.Count; posIndex++) {
+            for (int posIndex = 0; posIndex < m_positions.Count; posIndex++) {
                 links.Add(new PositionLinks());
             }
             for (int triIndex = 0; triIndex < m_triangles.Count; triIndex++) {
