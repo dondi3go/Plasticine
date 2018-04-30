@@ -46,7 +46,7 @@ namespace Plasticine {
         }
 
         //
-        // Copy a point from another PointList and preserve point uid, see Bridge() method 
+        // Copy a point from another PointList and preserve point uid, see Bridge(), Reverse(), Shift()  methods
         //
         public void Copy(PointList list, int index) {
             m_points.Add (list.m_points[index]);
@@ -137,7 +137,7 @@ namespace Plasticine {
         public PointList Reverse() {
             PointList result = new PointList();
             for (int i=this.Count-1; i>=0; i--) {
-                result.Add (this[i]);
+                result.Copy (this, i);
             }
             return result;
         }
@@ -145,11 +145,11 @@ namespace Plasticine {
         //
         // Shift
         //
-        public PointList Shift() {
+        public PointList Shift(int shift = 1) {
             PointList result = new PointList();
             for (int i=0; i<this.Count; i++) {
-                int index = (i + 1) % this.Count;
-                result.Add (this[index]);
+                int index = (i + shift) % this.Count;
+                result.Copy (this, index);
             }
             return result;
         }
