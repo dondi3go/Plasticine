@@ -11,25 +11,47 @@ namespace Plasticine {
 
         public static Mesh BuildRoundBox(float xSize, float ySize, float zSize, float radius, int sides)
         {
-            // Bottom
-            PointList pointsA = CreateXZRectangle (xSize - 2f*radius, zSize - 2f*radius, AxisSide.Negative, -ySize*0.5f);
-            PointList pointsB = CreateXZRoundRectangle(xSize, zSize, radius, sides, AxisSide.Negative, -ySize*0.5f + radius);
+            // Bottom rectangle
+            PointList pointsB = CreateXZRectangle (xSize - 2f*radius, zSize - 2f*radius, AxisSide.Positive, -ySize*0.5f);
 
-            // Top
-            PointList pointsC = CreateXZRoundRectangle(xSize, zSize, radius, sides, AxisSide.Negative, ySize*0.5f - radius);
-            PointList pointsD = CreateXZRectangle (xSize - 2f*radius, zSize - 2f*radius, AxisSide.Positive, ySize*0.5f);
+            // Bottom sides
+            List<PointList> steps = new List<PointList>();
+            for (int i = 1; i < sides + 1; i++) {
+                float a = - Mathf.PI / 2f  + i * Mathf.PI / (2f * sides);
+                float r = radius * Mathf.Cos (a);
+                steps.Add( CreateXZRoundRectangle(xSize - 2f*(radius - r), zSize - 2f*(radius - r), r, sides, AxisSide.Positive, -ySize*0.5f + radius + radius * Mathf.Sin(a)) );
+            }
+
+            // Top sides
+            for (int i = 0; i < sides ; i++) {
+                float a = i * Mathf.PI / (2f * sides);
+                float r = radius * Mathf.Cos (a);
+                steps.Add( CreateXZRoundRectangle(xSize - 2f*(radius - r), zSize - 2f*(radius - r), r, sides, AxisSide.Positive, ySize*0.5f - radius + radius * Mathf.Sin(a)) );
+            }
+
+            // Top rectangle
+            PointList pointsT = CreateXZRectangle (xSize - 2f*radius, zSize - 2f*radius, AxisSide.Positive, ySize*0.5f);
+
+            // Polygons
+            List<PointList> list = new List<PointList>();
+            for (int i = 0; i < steps.Count - 1; i++) {
+                list.AddRange( steps [i].Bridge (steps [i + 1], true));
+            }
+            list.AddRange(BridgeRectangleToRoundRectangle (pointsB, steps [0])); // bottom 
+            list.AddRange(BridgeRoundRectangleToRectangle (steps [steps.Count - 1], pointsT)); // top
 
             // Create Unity Mesh
             PMesh mesh = new PMesh ();
-            mesh.Cap (pointsA);
-            mesh.Cap (BridgeRectangleToRoundRectangle(pointsA, pointsB));
-            mesh.Cap (pointsC.Bridge(pointsB, true));
-            mesh.Cap (BridgeRectangleToRoundRectangle(pointsD.Shift(), pointsC.Reverse()));
-            mesh.Cap (pointsD);
-
-            return mesh.Build (1f);
+            mesh.Cap (pointsB.Reverse());
+            mesh.Cap (list);
+            mesh.Cap (pointsT);
+            return mesh.Build ();
         }
 
+        private static List<PointList> BridgeRoundRectangleToRectangle(PointList roundRect, PointList rect)
+        {
+            return BridgeRectangleToRoundRectangle (rect.Reverse (), roundRect.Reverse ());
+        }
 
         private static List<PointList> BridgeRectangleToRoundRectangle(PointList rect, PointList roundRect)
         {
@@ -41,8 +63,8 @@ namespace Plasticine {
             for(int i=1; i<pointsPerCorner; i++) {
                 PointList points = new PointList ();
                 points.Copy (rect, 0);
-                points.Copy (roundRect, i - 1);
                 points.Copy (roundRect, i);
+                points.Copy (roundRect, i - 1);
                 list.Add (points);
             }
 
@@ -50,8 +72,8 @@ namespace Plasticine {
             for(int i=1; i<pointsPerCorner; i++) {
                 PointList points = new PointList ();
                 points.Copy (rect, 1);
-                points.Copy (roundRect, pointsPerCorner + i - 1);
                 points.Copy (roundRect, pointsPerCorner + i);
+                points.Copy (roundRect, pointsPerCorner + i - 1);
                 list.Add (points);
             }
 
@@ -59,8 +81,8 @@ namespace Plasticine {
             for(int i=1; i<pointsPerCorner; i++) {
                 PointList points = new PointList ();
                 points.Copy (rect, 2);
-                points.Copy (roundRect, 2*pointsPerCorner + i - 1);
                 points.Copy (roundRect, 2*pointsPerCorner + i);
+                points.Copy (roundRect, 2*pointsPerCorner + i - 1);
                 list.Add (points);
             }
 
@@ -68,20 +90,18 @@ namespace Plasticine {
             for(int i=1; i<pointsPerCorner; i++) {
                 PointList points = new PointList ();
                 points.Copy (rect, 3);
-                points.Copy (roundRect, 3*pointsPerCorner + i - 1);
                 points.Copy (roundRect, 3*pointsPerCorner + i);
+                points.Copy (roundRect, 3*pointsPerCorner + i - 1);
                 list.Add (points);
             }
-
-            Debug.Log ("modulo : " + (-1 % 4) );
 
             // Sides
             for (int i = 1; i <= 4; i++) {
                 PointList points = new PointList ();
                 points.Copy (rect, i % 4);
-                points.Copy (rect, (i - 1) % 4);
-                points.Copy (roundRect, (i * pointsPerCorner - 1) % roundRect.Count);
                 points.Copy (roundRect, (i * pointsPerCorner) % roundRect.Count);
+                points.Copy (roundRect, (i * pointsPerCorner - 1) % roundRect.Count);
+                points.Copy (rect, (i - 1) % 4);
 
                 list.Add (points);
             }
@@ -93,42 +113,64 @@ namespace Plasticine {
         {
             PointList result = new PointList ();
 
-            float x = xSize * 0.5f;
-            float z = zSize * 0.5f;
+            float x = xSize * 0.5f - radius;
+            float z = zSize * 0.5f - radius;
 
             float PI_2 = Mathf.PI * 0.5f;
             float indexToAngle = PI_2 / cornerSides;
 
             if (axisSide == AxisSide.Negative) {
+                
                 // Corner 1
                 for(int i=0; i<cornerSides+1; i++) {
                     float angle = PI_2 + i * indexToAngle;
-                    result.Add ( -x + radius + radius * Mathf.Cos(angle) , axisCoord, z - radius + radius * Mathf.Sin(angle) );
+                    result.Add ( -x + radius * Mathf.Cos(angle) , axisCoord, z + radius * Mathf.Sin(angle) );
                 }
 
                 // Corner 2
                 for (int i = 0; i < cornerSides + 1; i++) {
                     float angle = Mathf.PI + i * indexToAngle;
-                    result.Add ( -x + radius + radius * Mathf.Cos(angle) , axisCoord, -z + radius + radius * Mathf.Sin(angle) );
+                    result.Add ( -x + radius * Mathf.Cos(angle) , axisCoord, -z + radius * Mathf.Sin(angle) );
                 }
 
                 // Corner 3
                 for (int i = 0; i < cornerSides + 1; i++) {
-                    float angle = Mathf.PI + PI_2 + i * indexToAngle;
-                    result.Add ( x - radius + radius * Mathf.Cos(angle) , axisCoord, -z + radius + radius * Mathf.Sin(angle) );
+                    float angle = - PI_2 + i * indexToAngle;
+                    result.Add ( x + radius * Mathf.Cos(angle) , axisCoord, -z + radius * Mathf.Sin(angle) );
                 }
 
                 // Corner 4
                 for (int i = 0; i < cornerSides + 1; i++) {
                     float angle = i * indexToAngle;
-                    result.Add ( x - radius + radius * Mathf.Cos(angle) , axisCoord, z - radius + radius * Mathf.Sin(angle) );
+                    result.Add ( x + radius * Mathf.Cos(angle) , axisCoord, z + radius * Mathf.Sin(angle) );
                 }
 
             } else {
-                result.Add (-x, 0, z);
-                result.Add (x, 0, z);
-                result.Add (x, 0, -z);
-                result.Add (-x, 0, -z);
+
+                // Corner 1
+                for(int i=0; i<cornerSides+1; i++) {
+                    float angle =  Mathf.PI - i * indexToAngle;
+                    result.Add ( -x + radius * Mathf.Cos(angle) , axisCoord, z + radius * Mathf.Sin(angle) );
+                }
+
+                // Corner 4
+                for (int i = 0; i < cornerSides + 1; i++) {
+                    float angle = PI_2 - i * indexToAngle;
+                    result.Add ( x + radius * Mathf.Cos(angle) , axisCoord, z + radius * Mathf.Sin(angle) );
+                }
+
+                // Corner 3
+                for (int i = 0; i < cornerSides + 1; i++) {
+                    float angle = - i * indexToAngle;
+                    result.Add ( x + radius * Mathf.Cos(angle) , axisCoord, -z + radius * Mathf.Sin(angle) );
+                }
+
+                // Corner 2
+                for (int i = 0; i < cornerSides + 1; i++) {
+                    float angle = - PI_2 - i * indexToAngle;
+                    result.Add ( -x + radius * Mathf.Cos(angle) , axisCoord, -z + radius * Mathf.Sin(angle) );
+                }
+
             }
 
             return result;

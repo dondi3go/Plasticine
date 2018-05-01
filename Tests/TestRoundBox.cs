@@ -15,7 +15,7 @@ namespace Plasticine {
         {
             GameObject obj = CreateChild (x, z);
             obj.name = "RounBox";
-            Mesh mesh = RoundBoxBuilder.BuildRoundBox (1f, 0.5f, 0.7f, 0.1f, 3);
+            Mesh mesh = RoundBoxBuilder.BuildRoundBox (1f, 0.5f, 0.7f, 0.2f, 5);
             NodeBuilder.SetMesh (obj, mesh);
         }
 
