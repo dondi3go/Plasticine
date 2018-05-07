@@ -25,7 +25,7 @@ namespace Plasticine {
         //
         public static Mesh BuildBox(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
         {
-            PMesh builder = new PMesh();
+            ProceduralMesh builder = new ProceduralMesh();
 
             PointList pointsA = new PointList ();
             pointsA.Add (xMin, yMin, zMin);
@@ -46,13 +46,13 @@ namespace Plasticine {
         //
         //
         //
-        public static Mesh BuildSphere(PointListAxis axis, float radius, int sides)
+        public static Mesh BuildSphere(Axis axis, float radius, int sides)
         {
             if (radius > 0.02f) {
                 
                 // Works great up to radius = 0.02, under this limit normal issues appear
 
-                PMesh builder = new PMesh ();
+                ProceduralMesh builder = new ProceduralMesh ();
 
                 PointList points = PointList.CreatePolygon (axis, radius, sides);
 
@@ -93,13 +93,13 @@ namespace Plasticine {
         //
         //
         //
-        public static Mesh BuildHemisphere(PointListAxis axis, AxisSide axisSide, float radius, int sides)
+        public static Mesh BuildHemisphere(Axis axis, AxisSide axisSide, float radius, int sides)
         {
             if (radius > 0.02f) {
 
                 // Works great up to radius = 0.02, under this limit normal issues appear
 
-                PMesh builder = new PMesh ();
+                ProceduralMesh builder = new ProceduralMesh ();
 
                 PointList points = PointList.CreatePolygon (axis, radius, sides);
 
@@ -144,9 +144,9 @@ namespace Plasticine {
         //
         //
         //
-        public static Mesh BuildUnitArcSphere(PointListAxis axis, float arcMinDeg, float arcMaxDeg, int sides)
+        public static Mesh BuildUnitArcSphere(Axis axis, float arcMinDeg, float arcMaxDeg, int sides)
         {
-            PMesh builder = new PMesh ();
+            ProceduralMesh builder = new ProceduralMesh ();
 
             int n = Mathf.FloorToInt((arcMaxDeg - arcMinDeg) * sides / 360f);
 
@@ -177,7 +177,7 @@ namespace Plasticine {
         //
         //
         //
-        public static Mesh BuildArcSphere(PointListAxis axis, float arcMinDeg, float arcMaxDeg, float radius, int sides)
+        public static Mesh BuildArcSphere(Axis axis, float arcMinDeg, float arcMaxDeg, float radius, int sides)
         {
             Mesh mesh = BuildUnitArcSphere(axis, arcMinDeg, arcMaxDeg, sides);
             MeshAdapter.ScaleVertices (ref mesh, radius);
@@ -188,9 +188,9 @@ namespace Plasticine {
         //
         //
         //
-        public static Mesh BuildCylinder(PointListAxis axis, float radius, float height, int sides)
+        public static Mesh BuildCylinder(Axis axis, float radius, float height, int sides)
         {
-            PMesh builder = new PMesh();
+            ProceduralMesh builder = new ProceduralMesh();
 
             PointList pointsA = PointList.CreatePolygon (axis, radius, sides, -0.5f * height);
             PointList pointsB = pointsA.Translate ( height * Vector (axis) );
@@ -205,14 +205,14 @@ namespace Plasticine {
         //
         // Get a vector matching the enum 'PointListAxis'
         //
-        private static Vector3 Vector(PointListAxis axis)
+        private static Vector3 Vector(Axis axis)
         {
             Vector3 result;
             switch (axis) {
-            case PointListAxis.XAxis:
+            case Axis.XAxis:
                 result = new Vector3 (1f, 0, 0);
                 break;
-            case PointListAxis.YAxis:
+            case Axis.YAxis:
                 result = new Vector3 (0, 1f, 0);
                 break;
             default:

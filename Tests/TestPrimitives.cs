@@ -41,7 +41,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "XSphere";
-        Mesh mesh = PrimitiveBuilder.BuildSphere (PointListAxis.XAxis, 0.5f, 24);
+        Mesh mesh = PrimitiveBuilder.BuildSphere (Axis.XAxis, 0.5f, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 
@@ -52,7 +52,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "YSphere";
-        Mesh mesh = PrimitiveBuilder.BuildSphere (PointListAxis.YAxis, 0.5f, 24);
+        Mesh mesh = PrimitiveBuilder.BuildSphere (Axis.YAxis, 0.5f, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 
@@ -63,7 +63,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "ZSphere";
-        Mesh mesh = PrimitiveBuilder.BuildSphere (PointListAxis.ZAxis, 0.5f, 24);
+        Mesh mesh = PrimitiveBuilder.BuildSphere (Axis.ZAxis, 0.5f, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 
@@ -74,7 +74,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "XCylinder";
-        Mesh mesh = PrimitiveBuilder.BuildCylinder (PointListAxis.XAxis, 0.5f, 1, 24);
+        Mesh mesh = PrimitiveBuilder.BuildCylinder (Axis.XAxis, 0.5f, 1, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 
@@ -85,7 +85,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "YCylinder";
-        Mesh mesh = PrimitiveBuilder.BuildCylinder (PointListAxis.YAxis, 0.5f, 1, 24);
+        Mesh mesh = PrimitiveBuilder.BuildCylinder (Axis.YAxis, 0.5f, 1, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 
@@ -96,7 +96,7 @@ public class TestPrimitives : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
         obj.name = "ZCylinder";
-        Mesh mesh = PrimitiveBuilder.BuildCylinder (PointListAxis.ZAxis, 0.5f, 1, 24);
+        Mesh mesh = PrimitiveBuilder.BuildCylinder (Axis.ZAxis, 0.5f, 1, 24);
         NodeBuilder.SetMesh (obj, mesh);
     }
 

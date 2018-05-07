@@ -7,15 +7,15 @@ namespace Plasticine {
 
     //
     // Procedural Mesh Generation
-    // Ranem it into SHAPE
+
     //
-    public class PMesh {
+    public class ProceduralMesh {
 
         //
         // Link between a position in space and the triangles that use this position
         // See 'Build()' method
         //
-        class PositionLinks
+        private class PositionLinks
         {
             public Dictionary<int, int> triangleToVertex = new Dictionary<int, int> ();
         }
@@ -23,7 +23,7 @@ namespace Plasticine {
         //
         // A Triangle
         //
-        class Triangle
+        private class Triangle
         {
             public int[] pIndex = new int[3]; // indices in m_positions
             public int[] uvIndex = new int[3]; // id in uvs
@@ -43,7 +43,7 @@ namespace Plasticine {
         //
         //
         public void Cap(PointList points) {
-            
+
             // Add positions
             for(int i=0; i<points.Count; i++) {
                 AddPosition (points, i);
@@ -56,6 +56,7 @@ namespace Plasticine {
         }
 
         //
+        // Add a position from a PointList
         // Warning : here we assume uvs and positions share the same index ... NOT SURE AT ALL !
         //
         private void AddPosition(PointList points, int i)
@@ -92,9 +93,9 @@ namespace Plasticine {
         //
         //
         public void Cap(List<PointList> list) {
-            
+
             foreach (PointList points in list) {
-                
+
                 Cap (points);
             }
         }

@@ -330,27 +330,27 @@ namespace Plasticine {
         //
         //
         //
-        public static PointList CreatePolygon(PointListAxis axis, float radius, int sides, float axisCoord = 0f)
+        public static PointList CreatePolygon(Axis axis, float radius, int sides, float axisCoord = 0f)
         {
             PointList result = new PointList ();
             float indexToAngle = Mathf.PI*2f/(float)sides;
             switch(axis)
             {
-            case PointListAxis.XAxis:
+            case Axis.XAxis:
                 for (int i = 0; i < sides; i++) {
                     float angle = i * indexToAngle;
                     result.Add (axisCoord, radius*Mathf.Cos(angle), radius*Mathf.Sin(angle));
                 }
                 break;
 
-            case PointListAxis.YAxis:
+            case Axis.YAxis:
                 for (int i = 0; i < sides; i++) {
                     float angle = i * indexToAngle;
                     result.Add (radius*Mathf.Sin(angle), axisCoord, radius*Mathf.Cos(angle));
                 }
                 break;
 
-            case PointListAxis.ZAxis:
+            case Axis.ZAxis:
                 for (int i = 0; i < sides; i++) {
                     float angle = i * indexToAngle;
                     result.Add (radius*Mathf.Cos(angle), radius*Mathf.Sin(angle), axisCoord);

@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace Plasticine {
 
-    public enum PointListAxis {XAxis, YAxis, ZAxis}
+    public enum Axis {XAxis, YAxis, ZAxis}
 
 }
