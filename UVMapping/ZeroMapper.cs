@@ -13,5 +13,13 @@ namespace Plasticine {
         {
             return new Vector2 (0f, 0f);
         }
+
+        public void SetRotation(float angleRad)
+        {
+        }
+
+        public void SetConstraint(Vector3 point, Vector2 uv)
+        {
+        }
     }
 }

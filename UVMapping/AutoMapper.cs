@@ -47,6 +47,59 @@ namespace Plasticine {
             }
         }
 
+        //
+        // UV rotation
+        //
+
+        public static void SetRotation(ref List<PointList> list, float angleRad)
+        {
+            for(int i=0; i<list.Count; i++) {
+                list [i].UVMapper.SetRotation(angleRad);
+            }
+        }
+
+        //
+        // UV Continuity
+        //
+        public static void Connect(ref List<PointList> list)
+        {
+            for(int i=1; i<list.Count; i++) {
+                Connect(list [i], list[i-1]);
+            }
+        }
+
+        //
+        // Update pointsA UV Mapping to get continuity with pointsB UVMapping
+        //
+        public static void Connect(PointList pointsA, PointList pointsB)
+        {
+            // Check uids identity
+            for (int i = 0; i < pointsA.Count; i++) {
+                for (int j = 0; j < pointsB.Count; j++) {
+                    if (pointsA.Uid (i) == pointsB.Uid (j)) {
+                        Vector2 uv = pointsB.UVMapper.GetUV (pointsB [j]);
+                        pointsA.UVMapper.SetConstraint(pointsA[i], uv);
+                        return;
+                    }
+                }
+            }
+
+            float epsilon = 0.001f;
+
+            // Check coordinates identity
+            for (int i = 0; i < pointsA.Count; i++) {
+                for (int j = 0; j < pointsB.Count; j++) {
+                    float d = Vector3.Distance (pointsA [i], pointsB[j]);
+                    if (d < epsilon) {
+                        Vector2 uv = pointsB.UVMapper.GetUV (pointsB [j]);
+                        pointsA.UVMapper.SetConstraint(pointsA[i], uv);
+                        return;
+                    }
+                }
+            }
+        }
+
+
     }
 
 }

@@ -16,26 +16,32 @@ namespace Plasticine {
         private float m_vX =-1f;
         private float m_vZ = 0f;
 
-        //
-        // Angle in radians
-        //
-        public void SetYRotation (float angle) {
+        private float m_du = 0.5f;
+        private float m_dv = 0.5f;
 
-            float cos = Mathf.Cos (Mathf.Deg2Rad * angle);
-            float sin = Mathf.Sin (Mathf.Deg2Rad * angle);
+        public Vector2 GetUV(Vector3 point)
+        {
+            float u = m_uX * point.x + m_uZ * point.z + m_du;
+            float v = m_vX * point.x + m_vZ * point.z + m_dv;
+            return new Vector2 (u, v);
+        }
+
+        public void SetRotation (float angleRad) {
+
+            float cos = Mathf.Cos (angleRad);
+            float sin = Mathf.Sin (angleRad);
 
             m_uX = sin;
             m_uZ = cos;
 
-            m_vX =-cos;
+            m_vX = -cos;
             m_vZ = -sin;
         }
 
-        public Vector2 GetUV(Vector3 point)
+        public void SetConstraint (Vector3 point, Vector2 uv)
         {
-            float u = m_uX * point.x + m_uZ * point.z + 0.5f;
-            float v = m_vX * point.x + m_vZ * point.z + 0.5f;
-            return new Vector2 (u, v);
+            m_du = uv.x - (m_uX * point.x + m_uZ * point.z);
+            m_dv = uv.y - (m_vX * point.x + m_vZ * point.z);
         }
 
     }

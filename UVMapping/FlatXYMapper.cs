@@ -34,10 +34,22 @@ namespace Plasticine {
             m_scale = scale;
         }
 
-        public void SetContraint(Vector3 point, Vector2 uv)
+        public void SetRotation(float angleRad)
         {
-            m_du = uv.x - point.x;
-            m_dv = uv.y - point.y;
+            float cos = Mathf.Cos (angleRad);
+            float sin = Mathf.Sin (angleRad);
+
+            m_uX = cos;
+            m_uY = sin;
+
+            m_vX = -sin;
+            m_vY = -cos;
+        }
+
+        public void SetConstraint(Vector3 point, Vector2 uv)
+        {
+            m_du = uv.x - m_scale * (m_uX * point.x + m_uY * point.y);
+            m_dv = uv.y - m_scale * (m_vX * point.x + m_vY * point.y);
         }
     }
 

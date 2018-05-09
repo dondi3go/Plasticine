@@ -26,12 +26,11 @@ namespace Plasticine {
         private class Triangle
         {
             public int[] pIndex = new int[3]; // indices in m_positions
-            public int[] uvIndex = new int[3]; // id in uvs
         }
 
         // Positions (can be shared)
         private List<Vector3> m_positions = new List<Vector3> ();
-        private Dictionary<int, int> m_uidToIndex = new Dictionary<int, int> (); // Important for PointList usage
+        private Dictionary<int, int> m_uidToIndex = new Dictionary<int, int> (); // Important for vertex sharing between triangles
 
         // UVs
         private List<Vector2> m_uvs = new List<Vector2> ();
@@ -76,16 +75,9 @@ namespace Plasticine {
         private void AddTriangle(int uid0, int uid1, int uid2)
         {
             Triangle t = new Triangle ();
-
             t.pIndex [0] = m_uidToIndex [uid0];
-            t.uvIndex [0] = m_uidToIndex [uid0];
-
             t.pIndex [1] = m_uidToIndex [uid1];
-            t.uvIndex [1] = m_uidToIndex [uid1];
-
             t.pIndex [2] = m_uidToIndex [uid2];
-            t.uvIndex [2] = m_uidToIndex [uid2];
-
             m_triangles.Add (t);
         }
 
@@ -189,6 +181,40 @@ namespace Plasticine {
             return mesh;
         }
 
+
+        //
+        //
+        //
+        public void Add(ProceduralMesh pmesh)
+        {
+            // TODO : Reindex every position to avoid issues with uids
+
+            int indexOffset = m_positions.Count;
+
+            // Add positions and uvs
+            for(int i = 0; i<pmesh.m_positions.Count; i++)
+            {
+                m_positions.Add ( pmesh.m_positions [i] );
+                m_uvs.Add (pmesh.m_uvs [i]);
+            }
+
+            // Add uids : does it matter ?
+            Dictionary<int, int>.KeyCollection uids = pmesh.m_uidToIndex.Keys;
+            foreach (int uid in uids)
+            {
+                m_uidToIndex [uid] = pmesh.m_uidToIndex[uid] + indexOffset;
+            }
+
+            // Add triangles
+            for (int i = 0; i < pmesh.m_triangles.Count; i++) {
+                Triangle tOther = pmesh.m_triangles [i];
+                Triangle tNew = new Triangle ();
+                tNew.pIndex[0] = tOther.pIndex[0] + indexOffset;
+                tNew.pIndex[1] = tOther.pIndex[1] + indexOffset;
+                tNew.pIndex[2] = tOther.pIndex[2] + indexOffset;
+                m_triangles.Add (tNew);
+            }
+        }
     }
 
 }

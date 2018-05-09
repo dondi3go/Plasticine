@@ -111,6 +111,19 @@ namespace Plasticine {
             m_uids.Clear ();
         }
 
+        //
+        // Create a clone with points having different uids
+        //
+        public PointList Duplicate()
+        {
+            PointList points = new PointList();
+            for (int i = 0; i < this.Count; i++) {
+                points.Add (this [i]);
+            }
+            points.UVMapper = this.UVMapper;
+            return points;
+        }
+
         // ---------------------------------------------------------
 
         //
@@ -168,7 +181,7 @@ namespace Plasticine {
         //
         // Return sides
         //
-        public  List<PointList> Bridge (PointList pointsB, bool close = false) {
+        public List<PointList> Bridge (PointList pointsB, bool close = false) {
             List<PointList> list = new List<PointList> ();
 
             // Add top points
@@ -190,6 +203,43 @@ namespace Plasticine {
             return list;
         }
 
+        public enum BridgeMode
+        {
+            Open,
+            CloseReuse,
+            CloseDuplicate
+        }
+
+        public List<PointList> BridgeB (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
+            List<PointList> list = new List<PointList> ();
+
+            // Add top points
+            int iMax = this.Count-1;
+            if (mode == BridgeMode.CloseReuse) {
+                iMax++;
+            }
+
+            for(int i=0; i<iMax; i++) {
+                // Add side points
+                PointList points = new PointList();
+                points.Copy (this, i);
+                points.Copy (this, (i+1) % this.Count);
+                points.Copy (pointsB, (i+1) % this.Count);
+                points.Copy (pointsB, i);
+                list.Add (points);
+            }
+
+            if (mode == BridgeMode.CloseDuplicate) {
+                PointList points = new PointList();
+                points.Copy (this, iMax);
+                points.Add (this[0]);
+                points.Add (pointsB[0]);
+                points.Copy (pointsB, iMax);
+                list.Add (points);
+            }
+
+            return list;
+        }
 
         //
         // Use origin, TODO : new origin should be returned !
