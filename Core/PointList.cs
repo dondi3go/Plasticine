@@ -168,6 +168,32 @@ namespace Plasticine {
         }
 
         //
+        // Min
+        //
+        public float Min(Axis axis)
+        {
+            float min = float.MaxValue;
+            switch(axis) {
+            case Axis.XAxis:
+                for (int i = 0; i < Count; i++) {
+                    min = Mathf.Min (this [i].x, min);
+                }
+                break;
+            case Axis.YAxis:
+                for (int i = 0; i < Count; i++) {
+                    min = Mathf.Min (this [i].y, min);
+                }
+                break;
+            case Axis.ZAxis:
+                for (int i = 0; i < Count; i++) {
+                    min = Mathf.Min (this [i].z, min);
+                }
+                break;
+            }
+            return min;
+        }
+
+        //
         // Translate
         //
         public PointList Translate(Vector3 direction) {
