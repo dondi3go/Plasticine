@@ -177,7 +177,9 @@ namespace Plasticine {
             mesh.SetTriangles(triangles, 0);
             mesh.RecalculateNormals();
             mesh.RecalculateBounds ();
+            #if UNITY_EDITOR
             Unwrapping.GenerateSecondaryUVSet (mesh);
+            #endif
             return mesh;
         }
 

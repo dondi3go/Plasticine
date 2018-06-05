@@ -25,7 +25,9 @@ namespace Plasticine {
             }
 
             mesh.SetUVs (0, uvs);
+            #if UNITY_EDITOR
             Unwrapping.GenerateSecondaryUVSet (mesh);
+            #endif
         }
 
 
