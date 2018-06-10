@@ -138,7 +138,7 @@ namespace Plasticine {
         }
 
         //
-        // Normal
+        // Normal, warning : it is nor normalized
         //
         public Vector3 ComputeNormal() {
             return Vector3.Cross(this[1]-this[0], this[2]-this[0]);
