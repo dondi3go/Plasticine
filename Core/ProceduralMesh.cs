@@ -178,7 +178,9 @@ namespace Plasticine {
             mesh.RecalculateNormals();
             mesh.RecalculateBounds ();
             #if UNITY_EDITOR
-            Unwrapping.GenerateSecondaryUVSet (mesh);
+            if(uvs.Count>0) {
+                Unwrapping.GenerateSecondaryUVSet (mesh);
+            }
             #endif
             return mesh;
         }
