@@ -20,7 +20,7 @@ namespace Plasticine {
         }
 
         //
-        //
+        // Get Current Mesh of GameObject
         //
         public static Mesh GetMesh(GameObject obj)
         {
@@ -29,6 +29,15 @@ namespace Plasticine {
                 return null;
             }
             return filter.sharedMesh;
+        }
+
+        //
+        // Add a Mesh as a collider
+        //
+        public static void SetMeshCollider(GameObject obj, Mesh mesh)
+        {
+            MeshCollider collider = GetMeshCollider (obj);
+            collider.sharedMesh = mesh;
         }
 
         //
@@ -41,7 +50,7 @@ namespace Plasticine {
         }
 
         //
-        // 
+        // Add one if none exists
         //
         public static MeshRenderer GetMeshRenderer(GameObject obj)
         {
@@ -59,7 +68,20 @@ namespace Plasticine {
         }
 
         //
+        // Add one if none exists
         //
+        private static MeshCollider GetMeshCollider(GameObject obj)
+        {
+            MeshCollider collider = obj.GetComponent<MeshCollider> ();
+            if(collider == null) {
+                // Add missing MeshCollider
+                collider = obj.AddComponent<MeshCollider>();
+            }
+            return collider;
+        }
+
+        //
+        // Add one if none exists
         //
         public static MeshFilter GetMeshFilter(GameObject obj)
         {
