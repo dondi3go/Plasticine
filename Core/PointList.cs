@@ -239,29 +239,36 @@ namespace Plasticine {
         public List<PointList> BridgeB (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
             List<PointList> list = new List<PointList> ();
 
-            // Add top points
-            int iMax = this.Count-1;
-            if (mode == BridgeMode.CloseReuse) {
-                iMax++;
-            }
+            if (Count != pointsB.Count) {
+                
+                Debug.LogError ("PointList : Cannot Bridge PointLists of different size (" + Count + " " + pointsB.Count + ")");
+            
+            } else {
 
-            for(int i=0; i<iMax; i++) {
-                // Add side points
-                PointList points = new PointList();
-                points.Copy (this, i);
-                points.Copy (this, (i+1) % this.Count);
-                points.Copy (pointsB, (i+1) % this.Count);
-                points.Copy (pointsB, i);
-                list.Add (points);
-            }
+                // Add top points
+                int iMax = this.Count - 1;
+                if (mode == BridgeMode.CloseReuse) {
+                    iMax++;
+                }
 
-            if (mode == BridgeMode.CloseDuplicate) {
-                PointList points = new PointList();
-                points.Copy (this, iMax);
-                points.Add (this[0]);
-                points.Add (pointsB[0]);
-                points.Copy (pointsB, iMax);
-                list.Add (points);
+                for (int i = 0; i < iMax; i++) {
+                    // Add side points
+                    PointList points = new PointList ();
+                    points.Copy (this, i);
+                    points.Copy (this, (i + 1) % this.Count);
+                    points.Copy (pointsB, (i + 1) % this.Count);
+                    points.Copy (pointsB, i);
+                    list.Add (points);
+                }
+
+                if (mode == BridgeMode.CloseDuplicate) {
+                    PointList points = new PointList ();
+                    points.Copy (this, iMax);
+                    points.Add (this [0]);
+                    points.Add (pointsB [0]);
+                    points.Copy (pointsB, iMax);
+                    list.Add (points);
+                }
             }
 
             return list;
