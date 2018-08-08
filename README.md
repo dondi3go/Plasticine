@@ -1,6 +1,8 @@
 # Plasticine
 Procedural Mesh generation framework for Unity
 
+![Plasticine picture](Plasticine.png)
+
 Can be used to create geometry in editor mode or in game mode.
 Vertices can be shared or not. Normals are smoothed depending on a limit angle.
 
