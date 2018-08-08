@@ -15,7 +15,7 @@ public class TestBranch : MonoBehaviour {
         MeshBuilder builder = new MeshBuilder ();
 
         // Create a cube
-        PointList pointsA = PointList.CreateUnitTile ();
+        PointList pointsA = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsB = pointsA.Translate (Vector3.up);
         List<PointList> list = pointsA.Bridge(pointsB, true);
         list.Add (pointsA.Reverse ());

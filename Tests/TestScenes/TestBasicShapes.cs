@@ -34,7 +34,7 @@ public class TestBasicShapes : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
 
-        PointList points = PointList.CreateUnitTile ();
+        PointList points = PrimitiveBuilder.CreateUnitTile ();
         MeshBuilder builder = new MeshBuilder ();
         builder.Cap (points);
         Mesh mesh = builder.Bake ();
@@ -47,7 +47,7 @@ public class TestBasicShapes : MonoBehaviour {
     {
         GameObject obj = CreateChild (x, z);
 
-        PointList pointsA = PointList.CreateUnitTile ();
+        PointList pointsA = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsB = pointsA.Translate (Vector3.up);
 
         List<PointList> list = pointsA.Bridge (pointsB, true);
@@ -67,7 +67,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
 
         MeshBuilder builder = new MeshBuilder ();
-        PointList pointsA = PointList.CreateUnitTile ();
+        PointList pointsA = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsB = pointsA.Translate (Vector3.up);
         List<PointList> list = pointsA.Bridge(pointsB, true);
         list.Add (pointsA.Reverse ());
@@ -88,7 +88,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        builder.Cap (PointList.CreateUnitPolygon (3));
+        builder.Cap (PrimitiveBuilder.CreateUnitPolygon (3));
         Mesh mesh = builder.Bake ();
 
         NodeBuilder.SetMesh (obj, mesh);
@@ -100,7 +100,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        PointList pointsA = PointList.CreateUnitPolygon (3);
+        PointList pointsA = PrimitiveBuilder.CreateUnitPolygon (3);
         PointList pointsB = pointsA.Translate(new Vector3(0f, 1f, 0f));
         builder.Cap ( pointsA.Bridge(pointsB, true) );
         builder.Cap ( pointsB );
@@ -116,7 +116,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        PointList pointsA = PointList.CreateUnitPolygon (3);
+        PointList pointsA = PrimitiveBuilder.CreateUnitPolygon (3);
         PointList pointsB = pointsA.Translate(new Vector3(0f, 1f, 0f));
         List<PointList> list = pointsA.Bridge(pointsB, true);
         list.Add( pointsB );
@@ -137,7 +137,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        builder.Cap (PointList.CreateUnitPolygon (5));
+        builder.Cap (PrimitiveBuilder.CreateUnitPolygon (5));
         Mesh mesh = builder.Bake ();
 
         NodeBuilder.SetMesh (obj, mesh);
@@ -149,7 +149,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        PointList pointsA = PointList.CreateUnitPolygon (5);
+        PointList pointsA = PrimitiveBuilder.CreateUnitPolygon (5);
         PointList pointsB = pointsA.Translate(new Vector3(0f, 1f, 0f));
         builder.Cap ( pointsA.Bridge(pointsB, true) );
         builder.Cap ( pointsB );
@@ -165,7 +165,7 @@ public class TestBasicShapes : MonoBehaviour {
         GameObject obj = CreateChild (x, z);
         
         MeshBuilder builder = new MeshBuilder ();
-        PointList pointsA = PointList.CreateUnitPolygon (5);
+        PointList pointsA = PrimitiveBuilder.CreateUnitPolygon (5);
         PointList pointsB = pointsA.Translate(new Vector3(0f, 1f, 0f));
         List<PointList> list = pointsA.Bridge(pointsB, true);
         list.Add( pointsB );

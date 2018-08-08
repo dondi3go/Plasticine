@@ -9,6 +9,68 @@ namespace Plasticine {
     //
     public class PrimitiveBuilder {
 
+        //
+        //
+        //
+        public static PointList CreateUnitTile()
+        {
+            PointList result = new PointList ();
+            result.Add (new Vector3(0.5f, 0, 0.5f));
+            result.Add (new Vector3(0.5f, 0, -0.5f));
+            result.Add (new Vector3(-0.5f, 0, -0.5f));
+            result.Add (new Vector3(-0.5f, 0, 0.5f));
+            return result;
+        }
+
+
+        //
+        //
+        //
+        public static PointList CreateUnitPolygon(int sides)
+        {
+            PointList result = new PointList ();
+            float indexToAngle = Mathf.PI*2f/(float)sides;
+            for (int i = 0; i < sides; i++) {
+                float angle = i * indexToAngle;
+                result.Add (0.5f*Mathf.Sin(angle), 0f, 0.5f*Mathf.Cos(angle));
+            }
+            return result;
+        }
+
+
+        //
+        //
+        //
+        public static PointList CreatePolygon(Axis axis, float radius, int sides, float axisCoord = 0f)
+        {
+            PointList result = new PointList ();
+            float indexToAngle = Mathf.PI*2f/(float)sides;
+            switch(axis)
+            {
+            case Axis.XAxis:
+                for (int i = 0; i < sides; i++) {
+                    float angle = i * indexToAngle;
+                    result.Add (axisCoord, radius*Mathf.Cos(angle), radius*Mathf.Sin(angle));
+                }
+                break;
+
+            case Axis.YAxis:
+                for (int i = 0; i < sides; i++) {
+                    float angle = i * indexToAngle;
+                    result.Add (radius*Mathf.Sin(angle), axisCoord, radius*Mathf.Cos(angle));
+                }
+                break;
+
+            case Axis.ZAxis:
+                for (int i = 0; i < sides; i++) {
+                    float angle = i * indexToAngle;
+                    result.Add (radius*Mathf.Cos(angle), radius*Mathf.Sin(angle), axisCoord);
+                }
+                break;
+            }
+            return result;
+        }
+
 
         //
         //
@@ -54,7 +116,7 @@ namespace Plasticine {
 
                 ProceduralMesh builder = new ProceduralMesh ();
 
-                PointList points = PointList.CreatePolygon (axis, radius, sides);
+                PointList points = CreatePolygon (axis, radius, sides);
 
                 int n = sides / 4;
 
@@ -101,7 +163,7 @@ namespace Plasticine {
 
                 ProceduralMesh builder = new ProceduralMesh ();
 
-                PointList points = PointList.CreatePolygon (axis, radius, sides);
+                PointList points = CreatePolygon (axis, radius, sides);
 
                 int n = sides / 4;
 
@@ -154,7 +216,7 @@ namespace Plasticine {
 
             for (int i = 0; i <= n; i++) {
                 float angle = Mathf.Deg2Rad * (arcMinDeg + i * (arcMaxDeg - arcMinDeg) / n);
-                pointsM[i] = PointList.CreatePolygon (axis, Mathf.Cos (angle), sides, Mathf.Sin (angle));
+                pointsM[i] = CreatePolygon (axis, Mathf.Cos (angle), sides, Mathf.Sin (angle));
                 if (i > 0) {
                     builder.Cap (pointsM [i-1].Bridge (pointsM [i], true));
                 }
@@ -192,7 +254,7 @@ namespace Plasticine {
         {
             ProceduralMesh builder = new ProceduralMesh();
 
-            PointList pointsA = PointList.CreatePolygon (axis, radius, sides, -0.5f * height);
+            PointList pointsA = CreatePolygon (axis, radius, sides, -0.5f * height);
             PointList pointsB = pointsA.Translate ( height * Vector (axis) );
 
             builder.Cap (pointsA.Reverse ());

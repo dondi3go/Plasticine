@@ -10,7 +10,7 @@ namespace Plasticine {
 public class TestDivide : MonoBehaviour {
 
     void Start () {
-        PointList pointsA = PointList.CreateUnitTile ();
+        PointList pointsA = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsB = pointsA.Translate (0.2f*Vector3.up);
         List<PointList> list = pointsB.Divide (3, 3);
 

@@ -14,7 +14,7 @@ public class TestInflate : MonoBehaviour {
 
         MeshBuilder builder = new MeshBuilder ();
 
-        PointList pointsZ = PointList.CreateUnitTile ();
+        PointList pointsZ = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsA = pointsZ.Translate (new Vector3 (0f, -0.5f, 0f));
         PointList pointsB = pointsA.Translate (Vector3.up);
         List<PointList> list = pointsA.Bridge(pointsB, true);

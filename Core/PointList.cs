@@ -20,7 +20,7 @@ namespace Plasticine {
         private IUVMapper m_uvMapper = new ZeroMapper();
 
         //
-        // Keep a unique id for each unique point, share id when needed
+        // Keep a unique identifier for each unique point, share id when needed
         //
         private List<int> m_uids = new List<int>();
 
@@ -54,7 +54,7 @@ namespace Plasticine {
         }
 
         //
-        // Operator [] : point
+        // Operator [] : get the point at a given index
         //
         public Vector3 this [int index] {
             get {
@@ -63,14 +63,14 @@ namespace Plasticine {
         }
 
         //
-        // Uid () : uid
+        // Unique identifier of point at a given index
         //
         public int Uid(int index) {
             return m_uids [index];
         }
 
         //
-        // Count
+        // Get the number of points in the list 
         //
         public int Count
         {
@@ -80,7 +80,7 @@ namespace Plasticine {
         }
 
         //
-        // Enumerator
+        // Implementation of IEnumerable<> interface
         //
         public IEnumerator<Vector3> GetEnumerator() {
             return m_points.GetEnumerator();
@@ -91,7 +91,7 @@ namespace Plasticine {
         }
 
         //
-        // UV Mapper
+        // UV Mapper access
         //
         public IUVMapper UVMapper 
         {
@@ -104,7 +104,7 @@ namespace Plasticine {
         }
 
         //
-        // Clear
+        // Empty the list
         //
         public void Clear() {
             m_points.Clear ();
@@ -112,7 +112,7 @@ namespace Plasticine {
         }
 
         //
-        // Create a clone with points having different uids
+        // Create a clone with points having same coordinates but different uids
         //
         public PointList Duplicate()
         {
@@ -138,7 +138,7 @@ namespace Plasticine {
         }
 
         //
-        // Normal, warning : it is nor normalized
+        // Normal, warning : it is not normalized
         //
         public Vector3 ComputeNormal() {
             return Vector3.Cross(this[1]-this[0], this[2]-this[0]);
@@ -381,67 +381,6 @@ namespace Plasticine {
             return result;
         }
 
-        // ---------------------------------------------------------
-
-        //
-        //
-        //
-        public static PointList CreateUnitTile()
-        {
-            PointList result = new PointList ();
-            result.Add (new Vector3(0.5f, 0, 0.5f));
-            result.Add (new Vector3(0.5f, 0, -0.5f));
-            result.Add (new Vector3(-0.5f, 0, -0.5f));
-            result.Add (new Vector3(-0.5f, 0, 0.5f));
-            return result;
-        }
-
-        //
-        //
-        //
-        public static PointList CreateUnitPolygon(int sides)
-        {
-            PointList result = new PointList ();
-            float indexToAngle = Mathf.PI*2f/(float)sides;
-            for (int i = 0; i < sides; i++) {
-                float angle = i * indexToAngle;
-                result.Add (0.5f*Mathf.Sin(angle), 0f, 0.5f*Mathf.Cos(angle));
-            }
-            return result;
-        }
-
-        //
-        //
-        //
-        public static PointList CreatePolygon(Axis axis, float radius, int sides, float axisCoord = 0f)
-        {
-            PointList result = new PointList ();
-            float indexToAngle = Mathf.PI*2f/(float)sides;
-            switch(axis)
-            {
-            case Axis.XAxis:
-                for (int i = 0; i < sides; i++) {
-                    float angle = i * indexToAngle;
-                    result.Add (axisCoord, radius*Mathf.Cos(angle), radius*Mathf.Sin(angle));
-                }
-                break;
-
-            case Axis.YAxis:
-                for (int i = 0; i < sides; i++) {
-                    float angle = i * indexToAngle;
-                    result.Add (radius*Mathf.Sin(angle), axisCoord, radius*Mathf.Cos(angle));
-                }
-                break;
-
-            case Axis.ZAxis:
-                for (int i = 0; i < sides; i++) {
-                    float angle = i * indexToAngle;
-                    result.Add (radius*Mathf.Cos(angle), radius*Mathf.Sin(angle), axisCoord);
-                }
-                break;
-            }
-            return result;
-        }
     }
 
 }
