@@ -23,13 +23,12 @@ public class TestInflate : MonoBehaviour {
         foreach(PointList points in list) {
             SphereSide (points, builder, 5);
         }
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (gameObject, mesh);
     }
 
     void SphereSide(PointList points, MeshBuilder builder, int depth) {
-
         List<PointList> list = points.Divide (4, 4);
         foreach(PointList p in list) {
             PointList newP = p.Inflate (Vector3.zero, 1f, 1f);

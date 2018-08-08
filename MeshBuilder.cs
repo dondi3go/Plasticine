@@ -58,7 +58,7 @@ namespace Plasticine {
         //
         //
         //
-        public Mesh Bake() {
+        public Mesh Build() {
 
             Mesh mesh = new Mesh ();
 

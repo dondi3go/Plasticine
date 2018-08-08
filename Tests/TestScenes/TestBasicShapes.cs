@@ -37,7 +37,7 @@ public class TestBasicShapes : MonoBehaviour {
         PointList points = PrimitiveBuilder.CreateUnitTile ();
         MeshBuilder builder = new MeshBuilder ();
         builder.Cap (points);
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -56,7 +56,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap (list);
         builder.Cap (pointsB);
         builder.Cap (pointsA.Reverse());
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -75,7 +75,7 @@ public class TestBasicShapes : MonoBehaviour {
         foreach(PointList points in list) {
             Extend (points, builder);
         }
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -89,7 +89,7 @@ public class TestBasicShapes : MonoBehaviour {
         
         MeshBuilder builder = new MeshBuilder ();
         builder.Cap (PrimitiveBuilder.CreateUnitPolygon (3));
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -105,7 +105,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap ( pointsA.Bridge(pointsB, PointList.BridgeMode.CloseReuse) );
         builder.Cap ( pointsB );
         builder.Cap ( pointsA.Reverse() );
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -124,7 +124,7 @@ public class TestBasicShapes : MonoBehaviour {
         foreach(PointList points in list) {
             Extend (points, builder);
         }
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -138,7 +138,7 @@ public class TestBasicShapes : MonoBehaviour {
         
         MeshBuilder builder = new MeshBuilder ();
         builder.Cap (PrimitiveBuilder.CreateUnitPolygon (5));
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -154,7 +154,7 @@ public class TestBasicShapes : MonoBehaviour {
         builder.Cap ( pointsA.Bridge(pointsB, PointList.BridgeMode.CloseReuse) );
         builder.Cap ( pointsB );
         builder.Cap ( pointsA.Reverse() );
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;
@@ -173,7 +173,7 @@ public class TestBasicShapes : MonoBehaviour {
         foreach(PointList points in list) {
             Extend (points, builder);
         }
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         return obj;

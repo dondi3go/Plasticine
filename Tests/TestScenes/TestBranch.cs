@@ -25,7 +25,7 @@ public class TestBranch : MonoBehaviour {
         foreach(PointList points in list) {
             Branch (points, builder, 5);
         }
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (gameObject, mesh);
     }

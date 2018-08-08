@@ -22,7 +22,7 @@ public class TestDivide : MonoBehaviour {
         }
 
         builder.Cap (pointsA.Reverse ());
-        Mesh mesh = builder.Bake ();
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (gameObject, mesh);
     }
