@@ -1,0 +1,9 @@
+{
+    "name": "Plasticine",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

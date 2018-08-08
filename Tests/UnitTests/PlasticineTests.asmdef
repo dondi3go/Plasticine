@@ -1,6 +1,8 @@
 {
-    "name": "Tests",
-    "references": [],
+    "name": "PlasticineTests",
+    "references": [
+        "Plasticine"
+    ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],

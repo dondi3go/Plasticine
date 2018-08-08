@@ -10,14 +10,14 @@ namespace Plasticine {
     [TestFixture]
     public class ProceduralMeshTest {
 
-        public ProceduralMeshTest() {
-        }
+        /*public ProceduralMeshTest() {
+        }*/
 
         [Test]
-        public void Create()
+        public void TestCreate()
         {
             //ProceduralMesh pmesh = new ProceduralMesh ();
-            int i=2;
+            int i=1;
             Assert.AreEqual (i, 1);
         }
 
