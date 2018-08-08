@@ -208,16 +208,21 @@ namespace Plasticine {
             return result;
         }
 
-        public enum BridgeMode
-        {
-            Open,
-            CloseReuse,
-            CloseDuplicate
+        public PointList Translate(float x, float y, float z) {
+            return Translate (new Vector3 (x, y, z));
         }
 
         //
         // Bridge : return each side as a PointList
         //
+
+        public enum BridgeMode
+        {
+            Open,
+            CloseReuse,    // Reuse first point to close the loop
+            CloseDuplicate // Duplicate first points to close the loop
+        }
+
         public List<PointList> Bridge (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
             List<PointList> list = new List<PointList> ();
 
