@@ -98,7 +98,7 @@ namespace Plasticine {
             PointList pointsB = pointsA.Translate ( new Vector3(0f, yMax - yMin, 0f) );
 
             builder.Cap (pointsA.Reverse());
-            builder.Cap (pointsA.Bridge (pointsB, true));
+            builder.Cap (pointsA.Bridge (pointsB, PointList.BridgeMode.CloseReuse));
             builder.Cap (pointsB);
 
             return builder.Build();
@@ -131,14 +131,14 @@ namespace Plasticine {
                 for (int i = 1; i <= n; i++) {
                     float angle = i * indexToRadAngle;
                     pointsM [i] = points.Scale (Mathf.Cos (angle)).Translate (radius * Mathf.Sin (angle) * v);
-                    builder.Cap (pointsM [i - 1].Bridge (pointsM [i], true));
+                    builder.Cap (pointsM [i - 1].Bridge (pointsM [i], PointList.BridgeMode.CloseReuse));
                 }
 
                 // Second Hemisphere
                 for (int i = 1; i <= n; i++) {
                     float angle = -i * indexToRadAngle;
                     pointsM [i] = points.Scale (Mathf.Cos (angle)).Translate (radius * Mathf.Sin (angle) * v);
-                    builder.Cap (pointsM [i].Bridge (pointsM [i - 1], true));
+                    builder.Cap (pointsM [i].Bridge (pointsM [i - 1], PointList.BridgeMode.CloseReuse));
                 }
 
                 return builder.Build ();
@@ -180,7 +180,7 @@ namespace Plasticine {
                     for (int i = 1; i <= n; i++) {
                         float angle = i * indexToRadAngle;
                         pointsM [i] = points.Scale (Mathf.Cos (angle)).Translate (radius * Mathf.Sin (angle) * v);
-                        builder.Cap (pointsM [i - 1].Bridge (pointsM [i], true));
+                        builder.Cap (pointsM [i - 1].Bridge (pointsM [i], PointList.BridgeMode.CloseReuse));
                     }
                 } else {
 
@@ -188,7 +188,7 @@ namespace Plasticine {
                     for (int i = 1; i <= n; i++) {
                         float angle = -i * indexToRadAngle;
                         pointsM [i] = points.Scale (Mathf.Cos (angle)).Translate (radius * Mathf.Sin (angle) * v);
-                        builder.Cap (pointsM [i].Bridge (pointsM [i - 1], true));
+                        builder.Cap (pointsM [i].Bridge (pointsM [i - 1], PointList.BridgeMode.CloseReuse));
                     }
                 }
 
@@ -218,7 +218,7 @@ namespace Plasticine {
                 float angle = Mathf.Deg2Rad * (arcMinDeg + i * (arcMaxDeg - arcMinDeg) / n);
                 pointsM[i] = CreatePolygon (axis, Mathf.Cos (angle), sides, Mathf.Sin (angle));
                 if (i > 0) {
-                    builder.Cap (pointsM [i-1].Bridge (pointsM [i], true));
+                    builder.Cap (pointsM [i-1].Bridge (pointsM [i], PointList.BridgeMode.CloseReuse));
                 }
             }
 
@@ -258,7 +258,7 @@ namespace Plasticine {
             PointList pointsB = pointsA.Translate ( height * Vector (axis) );
 
             builder.Cap (pointsA.Reverse ());
-            builder.Cap (pointsA.Bridge (pointsB, true));
+            builder.Cap (pointsA.Bridge (pointsB, PointList.BridgeMode.CloseReuse));
             builder.Cap (pointsB);
 
             return builder.Build ();

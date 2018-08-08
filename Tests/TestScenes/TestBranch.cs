@@ -17,7 +17,7 @@ public class TestBranch : MonoBehaviour {
         // Create a cube
         PointList pointsA = PrimitiveBuilder.CreateUnitTile ();
         PointList pointsB = pointsA.Translate (Vector3.up);
-        List<PointList> list = pointsA.Bridge(pointsB, true);
+        List<PointList> list = pointsA.Bridge(pointsB, PointList.BridgeMode.CloseReuse);
         list.Add (pointsA.Reverse ());
         list.Add (pointsB);
 
@@ -47,14 +47,14 @@ public class TestBranch : MonoBehaviour {
         Vector3 t0 = list [0] [1] - list [0] [0];
         Vector3 e0 = 0.5f * n0.normalized - 0.15f * t0.normalized;
         PointList points0 = list [0].Extrude (list [0].ComputeBarycenter(), e0, e0).Scale(0.8f);
-        builder.Cap (list [0].Bridge(points0, true));
+        builder.Cap (list [0].Bridge(points0, PointList.BridgeMode.CloseReuse));
         Branch (points0.Shift(), builder, depth - 1);
 
         Vector3 n1 = list [1].ComputeNormal();
         Vector3 t1 = list [1] [1] - list [1] [0];
         Vector3 e1 = 0.5f * n1.normalized + 0.15f * t1.normalized;
         PointList points1 = list [1].Extrude (list [1].ComputeBarycenter(), e1, e1).Scale(0.8f);
-        builder.Cap (list [1].Bridge(points1, true));
+        builder.Cap (list [1].Bridge(points1, PointList.BridgeMode.CloseReuse));
         Branch (points1.Shift(), builder, depth - 1);
     }
 

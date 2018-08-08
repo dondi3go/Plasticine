@@ -35,7 +35,7 @@ namespace Plasticine {
             // Polygons
             List<PointList> list = new List<PointList>();
             for (int i = 0; i < steps.Count - 1; i++) {
-                list.AddRange( steps [i].Bridge (steps [i + 1], true));
+                list.AddRange( steps [i].Bridge (steps [i + 1], PointList.BridgeMode.CloseReuse));
             }
             list.AddRange(BridgeRectangleToRoundRectangle (pointsB, steps [0])); // bottom 
             list.AddRange(BridgeRoundRectangleToRectangle (steps [steps.Count - 1], pointsT)); // top

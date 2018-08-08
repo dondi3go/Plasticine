@@ -38,7 +38,7 @@ public class TestMapping : MonoBehaviour {
         pointsA.Add (-x_2,-w_2,-w_2);
 
         PointList pointsB = pointsA.Translate (new Vector3(2f * x_2, 0, 0));
-        List<PointList> list = pointsA.BridgeB (pointsB, PointList.BridgeMode.Open);
+        List<PointList> list = pointsA.Bridge (pointsB, PointList.BridgeMode.Open);
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 
@@ -66,7 +66,7 @@ public class TestMapping : MonoBehaviour {
         pointsA.Add ( w_2,-y_2,-w_2);
 
         PointList pointsB = pointsA.Translate (new Vector3(0, 2f * y_2, 0));
-        List<PointList> list = pointsA.BridgeB (pointsB, PointList.BridgeMode.CloseDuplicate);
+        List<PointList> list = pointsA.Bridge (pointsB, PointList.BridgeMode.CloseDuplicate);
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 
@@ -94,7 +94,7 @@ public class TestMapping : MonoBehaviour {
         pointsA.Add (-w_2,-w_2,-z_2);
 
         PointList pointsB = pointsA.Translate (new Vector3(0, 0, 2f * z_2));
-        List<PointList> list = pointsA.BridgeB (pointsB, PointList.BridgeMode.CloseDuplicate);
+        List<PointList> list = pointsA.Bridge (pointsB, PointList.BridgeMode.CloseDuplicate);
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 

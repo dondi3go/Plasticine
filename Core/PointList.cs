@@ -204,31 +204,6 @@ namespace Plasticine {
             return result;
         }
 
-        //
-        // Return sides
-        //
-        public List<PointList> Bridge (PointList pointsB, bool close = false) {
-            List<PointList> list = new List<PointList> ();
-
-            // Add top points
-            int iMax = this.Count;
-            if (close == false) {
-                iMax--;
-            }
-
-            for(int i=0; i<iMax; i++) {
-                // Add side points
-                PointList points = new PointList();
-                points.Copy (this, i);
-                points.Copy (this, (i+1) % this.Count);
-                points.Copy (pointsB, (i+1) % this.Count);
-                points.Copy (pointsB, i);
-                list.Add (points);
-            }
-
-            return list;
-        }
-
         public enum BridgeMode
         {
             Open,
@@ -236,7 +211,10 @@ namespace Plasticine {
             CloseDuplicate
         }
 
-        public List<PointList> BridgeB (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
+        //
+        // Return each side as a PointList
+        //
+        public List<PointList> Bridge (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
             List<PointList> list = new List<PointList> ();
 
             if (Count != pointsB.Count) {
