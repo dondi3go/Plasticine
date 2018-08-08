@@ -1,9 +1,8 @@
 {
     "name": "Plasticine",
     "references": [],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }
