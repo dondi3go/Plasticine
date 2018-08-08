@@ -42,9 +42,9 @@ public class TestMapping : MonoBehaviour {
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (list);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (list);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);
@@ -70,9 +70,9 @@ public class TestMapping : MonoBehaviour {
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (list);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (list);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);
@@ -98,9 +98,9 @@ public class TestMapping : MonoBehaviour {
         AutoMapper.ComputeUVMapper (ref list);
         AutoMapper.Connect (ref list);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (list);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (list);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);
@@ -122,9 +122,9 @@ public class TestMapping : MonoBehaviour {
 
         AutoMapper.ComputeUVMapper (ref points);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (points);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (points);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);
@@ -146,9 +146,9 @@ public class TestMapping : MonoBehaviour {
 
         AutoMapper.ComputeUVMapper (ref points);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (points);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (points);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);
@@ -170,9 +170,9 @@ public class TestMapping : MonoBehaviour {
 
         AutoMapper.ComputeUVMapper (ref points);
 
-        ProceduralMesh pmesh = new ProceduralMesh ();
-        pmesh.Cap (points);
-        Mesh mesh = pmesh.Build ();
+        MeshBuilder builder = new MeshBuilder ();
+        builder.Cap (points);
+        Mesh mesh = builder.Build ();
 
         NodeBuilder.SetMesh (obj, mesh);
         NodeBuilder.SetMaterial (obj, material);

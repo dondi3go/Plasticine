@@ -87,7 +87,7 @@ namespace Plasticine {
         //
         public static Mesh BuildBox(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
         {
-            ProceduralMesh builder = new ProceduralMesh();
+            MeshBuilder builder = new MeshBuilder();
 
             PointList pointsA = new PointList ();
             pointsA.Add (xMin, yMin, zMin);
@@ -114,7 +114,7 @@ namespace Plasticine {
                 
                 // Works great up to radius = 0.02, under this limit normal issues appear
 
-                ProceduralMesh builder = new ProceduralMesh ();
+                MeshBuilder builder = new MeshBuilder ();
 
                 PointList points = CreatePolygon (axis, radius, sides);
 
@@ -161,7 +161,7 @@ namespace Plasticine {
 
                 // Works great up to radius = 0.02, under this limit normal issues appear
 
-                ProceduralMesh builder = new ProceduralMesh ();
+                MeshBuilder builder = new MeshBuilder ();
 
                 PointList points = CreatePolygon (axis, radius, sides);
 
@@ -208,7 +208,7 @@ namespace Plasticine {
         //
         public static Mesh BuildUnitArcSphere(Axis axis, float arcMinDeg, float arcMaxDeg, int sides)
         {
-            ProceduralMesh builder = new ProceduralMesh ();
+            MeshBuilder builder = new MeshBuilder ();
 
             int n = Mathf.FloorToInt((arcMaxDeg - arcMinDeg) * sides / 360f);
 
@@ -252,7 +252,7 @@ namespace Plasticine {
         //
         public static Mesh BuildCylinder(Axis axis, float radius, float height, int sides)
         {
-            ProceduralMesh builder = new ProceduralMesh();
+            MeshBuilder builder = new MeshBuilder();
 
             PointList pointsA = CreatePolygon (axis, radius, sides, -0.5f * height);
             PointList pointsB = pointsA.Translate ( height * Vector (axis) );

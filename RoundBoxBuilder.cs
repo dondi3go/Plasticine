@@ -41,11 +41,11 @@ namespace Plasticine {
             list.AddRange(BridgeRoundRectangleToRectangle (steps [steps.Count - 1], pointsT)); // top
 
             // Create Unity Mesh
-            ProceduralMesh mesh = new ProceduralMesh ();
-            mesh.Cap (pointsB.Reverse());
-            mesh.Cap (list);
-            mesh.Cap (pointsT);
-            return mesh.Build ();
+            MeshBuilder builder = new MeshBuilder ();
+            builder.Cap (pointsB.Reverse());
+            builder.Cap (list);
+            builder.Cap (pointsT);
+            return builder.Build ();
         }
 
         private static List<PointList> BridgeRoundRectangleToRectangle(PointList roundRect, PointList rect)
