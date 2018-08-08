@@ -212,14 +212,14 @@ namespace Plasticine {
         }
 
         //
-        // Return each side as a PointList
+        // Bridge : return each side as a PointList
         //
         public List<PointList> Bridge (PointList pointsB, BridgeMode mode = BridgeMode.Open) {
             List<PointList> list = new List<PointList> ();
 
             if (Count != pointsB.Count) {
                 
-                Debug.LogError ("PointList : Cannot Bridge PointLists of different size (" + Count + " " + pointsB.Count + ")");
+                Debug.LogError ("PointList : Cannot Bridge PointLists of different size (" + Count + " / " + pointsB.Count + ")");
             
             } else {
 
