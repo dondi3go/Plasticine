@@ -34,7 +34,7 @@ namespace Plasticine {
         //
         // Add a Mesh as a collider
         //
-        public static void SetMeshCollider(GameObject obj, Mesh mesh, bool isConvex = false)
+        public static void SetMeshCollider(GameObject obj, Mesh mesh, bool isConvex)
         {
             MeshCollider collider = GetMeshCollider (obj);
             collider.sharedMesh = mesh;
